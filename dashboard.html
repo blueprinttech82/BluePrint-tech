@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | BluePrint Tech</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 7%;
+
+            background: #0c1b2d;
+            border-bottom: 1px solid #29445d;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #3da9ff;
+        }
+
+        #logoutBtn {
+            padding: 10px 18px;
+
+            background: #162a40;
+            color: white;
+
+            border: 1px solid #35526d;
+            border-radius: 6px;
+
+            cursor: pointer;
+        }
+
+        #logoutBtn:hover {
+            background: #243e59;
+        }
+
+        .container {
+            padding: 35px 7%;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #8fa5bb;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 25px;
+
+            background: #0c1b2d;
+
+            border: 1px solid #29445d;
+            border-radius: 12px;
+        }
+
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #8fa5bb;
+            font-size: 14px;
+        }
+
+        .management {
+            margin-top: 40px;
+        }
+
+        .management h2 {
+            margin-bottom: 20px;
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .management-item {
+            padding: 25px;
+
+            background: #0c1b2d;
+
+            border: 1px solid #29445d;
+            border-radius: 12px;
+        }
+
+        .management-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .management-item p {
+            color: #8fa5bb;
+            margin-bottom: 18px;
+        }
+
+        .manage-btn {
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            background: #168cff;
+            color: white;
+
+            border-radius: 6px;
+        }
+
+        @media (max-width: 800px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            <span>BLUE</span>PRINT TECH
+        </div>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="welcome">
+
+            <h1>Admin Dashboard</h1>
+
+            <p>
+                Manage your BluePrint Tech website from here.
+            </p>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-icon">🖼️</div>
+                <h3>Projects</h3>
+                <p>Manage portfolio projects</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💼</div>
+                <h3>Services</h3>
+                <p>Manage your services</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3>Messages</h3>
+                <p>Customer inquiries</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⭐</div>
+                <h3>Testimonials</h3>
+                <p>Customer testimonials</p>
+            </div>
+
+        </section>
+
+
+        <!-- MANAGEMENT -->
+
+        <section class="management">
+
+            <h2>Website Management</h2>
+
+            <div class="management-grid">
+
+                <div class="management-item">
+
+                    <h3>🖼️ Portfolio Projects</h3>
+
+                    <p>
+                        Add projects, upload images and manage
+                        your portfolio.
+                    </p>
+
+                    <a href="projects.html" class="manage-btn">
+    Manage Projects
+</a>
+
+                </div>
+
+
+                <div class="management-item">
+
+                    <h3>💼 Services</h3>
+
+                    <p>
+                        Add and manage the services offered
+                        by BluePrint Tech.
+                    </p>
+
+                    <a href="#" class="manage-btn">
+                        Manage Services
+                    </a>
+
+                </div>
+
+
+                <div class="management-item">
+
+                    <h3>💬 Customer Messages</h3>
+
+                    <p>
+                        View inquiries submitted through
+                        the website.
+                    </p>
+
+                    <a href="#" class="manage-btn">
+                        View Messages
+                    </a>
+
+                </div>
+
+
+                <div class="management-item">
+
+                    <h3>⭐ Testimonials</h3>
+
+                    <p>
+                        Manage customer testimonials displayed
+                        on the website.
+                    </p>
+
+                    <a href="#" class="manage-btn">
+                        Manage Testimonials
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module">
+
+        import { auth } from "../js/firebase.js";
+
+        import {
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        // PROTECT DASHBOARD
+
+        onAuthStateChanged(auth, (user) => {
+
+            if (!user) {
+
+                window.location.href = "login.html";
+
+            }
+
+        });
+
+
+        // LOGOUT
+
+        const logoutBtn =
+            document.getElementById("logoutBtn");
+
+
+        logoutBtn.addEventListener("click", async () => {
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href = "login.html";
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

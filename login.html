@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | BluePrint Tech</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            font-family: Arial, sans-serif;
+
+            background: #07111f;
+            color: white;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+
+            padding: 35px;
+
+            background: #0c1b2d;
+
+            border: 1px solid #29445d;
+            border-radius: 15px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #3da9ff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8fa5bb;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            background: #07111f;
+            color: white;
+
+            border: 1px solid #29445d;
+            border-radius: 7px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #168cff;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+
+            border: none;
+            border-radius: 7px;
+
+            background: #168cff;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0872d5;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            color: #ff8d8d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="logo">
+            <span>BLUE</span>PRINT TECH
+        </div>
+
+        <h1>Admin Login</h1>
+
+        <p class="subtitle">
+            Manage your BluePrint Tech website
+        </p>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Admin email"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </div>
+
+
+    <script type="module">
+
+        import { auth } from "../js/firebase.js";
+
+        import {
+            signInWithEmailAndPassword
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+        const loginForm = document.getElementById("loginForm");
+        const message = document.getElementById("message");
+
+
+        loginForm.addEventListener("submit", async (event) => {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+
+            message.textContent = "Logging in...";
+
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+                window.location.href = "dashboard.html";
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.textContent =
+                    "Invalid email or password.";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

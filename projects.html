@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Projects - BluePrint Tech</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07111f;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #3b9cff;
+            margin-bottom: 25px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3b9cff;
+            text-decoration: none;
+        }
+
+        .form-box {
+            background: #0d1b2a;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #1d3557;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            color: #cbd5e1;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #29415f;
+            background: #07111f;
+            color: white;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 8px;
+            background: #1683ff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+        }
+
+        #preview {
+            display: none;
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        #status {
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="dashboard.html" class="back">← Back to Dashboard</a>
+
+    <h1>Manage Projects</h1>
+
+    <div class="form-box">
+
+        <form id="projectForm">
+
+            <label for="projectName">Project Name</label>
+            <input
+                type="text"
+                id="projectName"
+                placeholder="Example: PEFA School Website"
+                required
+            >
+
+            <label for="category">Category</label>
+
+            <select id="category" required>
+                <option value="">Select category</option>
+                <option>Website</option>
+                <option>Graphic Design</option>
+                <option>E-Commerce</option>
+                <option>Business System</option>
+                <option>School System</option>
+                <option>Other</option>
+            </select>
+
+            <label for="description">Description</label>
+
+            <textarea
+                id="description"
+                placeholder="Describe the project..."
+                required
+            ></textarea>
+
+            <label for="projectImage">Project Image</label>
+
+            <input
+                type="file"
+                id="projectImage"
+                accept="image/*"
+                required
+            >
+
+            <img id="preview" alt="Image preview">
+
+            <button type="submit" id="uploadBtn">
+                Save Project
+            </button>
+
+            <div id="status"></div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+    // Firebase
+    import { db, auth } from "../js/firebase.js";
+
+    import {
+        collection,
+        addDoc,
+        serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+    import {
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+
+    // Protect admin page
+    onAuthStateChanged(auth, (user) => {
+
+        if (!user) {
+            window.location.href = "login.html";
+        }
+
+    });
+
+
+    // Cloudinary
+    const CLOUD_NAME = "o41rvqk7";
+
+    const UPLOAD_PRESET = "blueprint_projects";
+
+
+    // Elements
+    const form = document.getElementById("projectForm");
+
+    const imageInput =
+        document.getElementById("projectImage");
+
+    const preview =
+        document.getElementById("preview");
+
+    const uploadBtn =
+        document.getElementById("uploadBtn");
+
+    const status =
+        document.getElementById("status");
+
+
+    // Image preview
+    imageInput.addEventListener("change", () => {
+
+        const file = imageInput.files[0];
+
+        if (!file) {
+
+            preview.style.display = "none";
+
+            return;
+        }
+
+        preview.src = URL.createObjectURL(file);
+
+        preview.style.display = "block";
+
+    });
+
+
+    // Save project
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+
+        const file = imageInput.files[0];
+
+        const projectName =
+            document.getElementById("projectName").value.trim();
+
+        const category =
+            document.getElementById("category").value;
+
+        const description =
+            document.getElementById("description").value.trim();
+
+
+        if (!file) {
+
+            status.textContent =
+                "Please select an image.";
+
+            return;
+        }
+
+
+        uploadBtn.disabled = true;
+
+        uploadBtn.textContent =
+            "Uploading image...";
+
+        status.textContent = "";
+
+
+        try {
+
+            // =========================
+            // 1. Upload image to Cloudinary
+            // =========================
+
+            const formData = new FormData();
+
+            formData.append("file", file);
+
+            formData.append(
+                "upload_preset",
+                UPLOAD_PRESET
+            );
+
+
+            const cloudinaryResponse =
+                await fetch(
+                    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+
+
+            const cloudinaryData =
+                await cloudinaryResponse.json();
+
+
+            if (!cloudinaryResponse.ok) {
+
+                throw new Error(
+                    cloudinaryData.error?.message ||
+                    "Cloudinary upload failed."
+                );
+
+            }
+
+
+            // URL of uploaded image
+            const imageUrl =
+                cloudinaryData.secure_url;
+
+
+            // =========================
+            // 2. Save project to Firestore
+            // =========================
+
+            uploadBtn.textContent =
+                "Saving project...";
+
+
+            await addDoc(
+                collection(db, "projects"),
+                {
+                    name: projectName,
+
+                    category: category,
+
+                    description: description,
+
+                    imageUrl: imageUrl,
+
+                    cloudinaryPublicId:
+                        cloudinaryData.public_id || null,
+
+                    createdAt:
+                        serverTimestamp()
+                }
+            );
+
+
+            // =========================
+            // 3. Success
+            // =========================
+
+            status.textContent =
+                "✅ Project saved successfully!";
+
+
+            form.reset();
+
+            preview.style.display = "none";
+
+            uploadBtn.textContent =
+                "Save Project";
+
+            uploadBtn.disabled = false;
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.textContent =
+                "❌ " + error.message;
+
+            uploadBtn.disabled = false;
+
+            uploadBtn.textContent =
+                "Save Project";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

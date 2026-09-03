@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BluePrint Tech | Digital Solutions</title>
+
+    <meta name="description"
+          content="BluePrint Tech provides professional website development, graphic design, e-commerce solutions and digital services.">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="logo">
+            <span>BLUE</span>PRINT
+            <small>TECH</small>
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
+
+        <nav id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="small-title">WELCOME TO BLUEPRINT TECH</p>
+
+            <h1>
+                We Build Ideas
+                <span>Into Digital Reality.</span>
+            </h1>
+
+            <p class="hero-text">
+                Professional websites, digital designs and technology
+                solutions designed to help businesses grow.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#contact" class="btn primary">
+                    Start a Project
+                </a>
+
+                <a href="#portfolio" class="btn secondary">
+                    View Our Work
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+
+        <div class="section-heading">
+            <p>WHAT WE DO</p>
+            <h2>Our Services</h2>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div class="icon">🌐</div>
+                <h3>Website Development</h3>
+                <p>
+                    Modern, responsive websites for businesses,
+                    organisations and individuals.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="icon">🎨</div>
+                <h3>Graphic Design</h3>
+                <p>
+                    Professional posters, advertisements,
+                    branding materials and social media designs.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="icon">🛒</div>
+                <h3>E-Commerce</h3>
+                <p>
+                    Online stores that allow businesses to showcase
+                    products and receive customer orders.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="icon">⚙️</div>
+                <h3>Business Systems</h3>
+                <p>
+                    Custom digital systems designed around the
+                    needs of your organisation.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PORTFOLIO -->
+    <section class="section portfolio-section" id="portfolio">
+
+        <div class="section-heading">
+            <p>OUR WORK</p>
+            <h2>Featured Projects</h2>
+        </div>
+
+       <div class="portfolio-grid" id="portfolioGrid">
+
+            <!-- Projects will later come from Firestore + Cloudinary -->
+
+            <div class="portfolio-placeholder">
+                <span>BLUEPRINT</span>
+                <h3>Projects Coming Soon</h3>
+                <p>
+                    Our latest projects will appear here.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="section about-section" id="about">
+
+        <div class="about-content">
+
+            <div>
+                <p class="section-label">ABOUT BLUEPRINT TECH</p>
+
+                <h2>
+                    Technology That
+                    <span>Moves Businesses Forward.</span>
+                </h2>
+            </div>
+
+            <div>
+                <p>
+                    BluePrint Tech is a digital technology and creative
+                    design business focused on helping people and
+                    organisations turn their ideas into professional
+                    digital solutions.
+                </p>
+
+                <p>
+                    From websites and business systems to graphic
+                    designs and e-commerce platforms, we build solutions
+                    that are practical, modern and easy to use.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <h2>Have an idea?</h2>
+
+        <p>
+            Let's turn your idea into something real.
+        </p>
+
+        <a href="#contact" class="btn primary">
+            Work With Us
+        </a>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section class="section contact-section" id="contact">
+
+        <div class="section-heading">
+            <p>GET IN TOUCH</p>
+            <h2>Start Your Project</h2>
+        </div>
+
+        <form id="contactForm">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Your full name"
+                required
+            >
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Phone number"
+                required
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email address"
+            >
+
+            <select id="service" required>
+
+                <option value="">
+                    Select a service
+                </option>
+
+                <option value="Website Development">
+                    Website Development
+                </option>
+
+                <option value="Graphic Design">
+                    Graphic Design
+                </option>
+
+                <option value="E-Commerce">
+                    E-Commerce
+                </option>
+
+                <option value="Business System">
+                    Business System
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+            <textarea
+                id="message"
+                placeholder="Tell us about your project..."
+                required
+            ></textarea>
+
+            <button type="submit" class="btn primary">
+                Send Inquiry
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-logo">
+            BLUEPRINT <span>TECH</span>
+        </div>
+
+        <p>
+            Building ideas into digital reality.
+        </p>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <p class="copyright">
+            © 2026 BluePrint Tech. All rights reserved.
+            0886065361/0983309430
+        </p>
+        
+        
+
+    </footer>
+
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
